@@ -10,6 +10,13 @@ const Nav = () => {
             <li>
                 <Link href = '/about'>ABOUT</Link>
             </li>
+            <li>
+                <Link href = '/addPerson'>ADD PERSON</Link>
+            </li>
+            <li>
+                <Link href = '/deletePerson'>DELETE PERSON</Link>
+            </li>
+
         </ul>
     </nav>
   )

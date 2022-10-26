@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
 import React from 'react'
-import { data } from '../../../data'
+import { firebaseCollectedData } from '../../../firebaseManager'
+
 const person = ({person}:  InferGetStaticPropsType<typeof getStaticProps> ) => {
-    console.log(person)
   return (
     <>
     <img src = {person[0].profileImage}></img>
@@ -17,11 +17,9 @@ const person = ({person}:  InferGetStaticPropsType<typeof getStaticProps> ) => {
 
 
 export const getStaticProps : GetStaticProps = async(context:any) => {
-    // const  res = await fetch(`${server}/api/persons/${context.params.id}`)
-    // const person = await res.json()
-    //const person = await data()
-    const person = data.filter(person => person.userId.toString() === context.params.id.toString() )
-    
+   
+    const person = firebaseCollectedData.filter(person => person.id.toString() === context.params.id.toString() )
+    console.log("hello");
     return {
         props:{
             person
@@ -31,15 +29,13 @@ export const getStaticProps : GetStaticProps = async(context:any) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () =>{
-    // const res = await fetch(`${server}/api/persons`)
-    // const persons = await res.json()
 
-    const ids = data.map((person: any) => person.userId)
-    const paths = ids.map((userId: { toString: () => any }) => ({params: {id: userId.toString()}}))
+    const ids = firebaseCollectedData.map((person: any) => person.id)
+    const paths = ids.map((id: { toString: () => any }) => ({params: {id: id.toString()}}))
 
     return{
         paths,
-        fallback: false
+        fallback: true
     }
 }
 

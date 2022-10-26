@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import{data} from '../../../data'
+import { firebaseCollectedData } from '../../../firebaseManager'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse){
-    res.status(200).json(data)
+    res.status(200).json(firebaseCollectedData)
 }
