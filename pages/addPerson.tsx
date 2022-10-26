@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { firebaseAddData, PersonData } from '../firebaseManager';
 
-const addPerson = () => {
+const AddPerson = () => {
 
 const [firstName, setFirstName] = useState(''); //CREATED USE STATE FOR EACH VALUES
 const [lastName, setLastName] = useState('');
@@ -48,4 +48,4 @@ const handleSubmit = (e: { preventDefault: () => void; }) => { //ADD DATA USING 
   )
 }
 
-export default addPerson
+export default AddPerson

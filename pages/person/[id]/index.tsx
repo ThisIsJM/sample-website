@@ -18,8 +18,7 @@ const person = ({person}:  InferGetStaticPropsType<typeof getStaticProps> ) => {
 
 export const getStaticProps : GetStaticProps = async(context:any) => {
    
-    const person = firebaseCollectedData.filter(person => person.id.toString() === context.params.id.toString() )
-    console.log("hello");
+    const person = firebaseCollectedData.filter(person => person.id === context.params.id )
     return {
         props:{
             person
@@ -35,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () =>{
 
     return{
         paths,
-        fallback: true
+        fallback: 'blocking'
     }
 }
 

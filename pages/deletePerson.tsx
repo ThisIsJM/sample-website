@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { firebaseDeleteData } from '../firebaseManager';
 
-const deletePerson = () => {
+const DeletePerson = () => {
 
     const [id, setId] = useState('');
 
@@ -20,4 +20,4 @@ const deletePerson = () => {
   )
 }
 
-export default deletePerson
+export default DeletePerson
