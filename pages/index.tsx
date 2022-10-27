@@ -1,36 +1,19 @@
-import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
-import { useEffect, useState } from 'react'
+import { orderBy, query } from 'firebase/firestore'
+import type { NextPage } from 'next'
 import GetPersons from '../components/GetPersons'
-import PersonList from '../components/PersonList' 
+import { colRef } from '../firebaseManager'
 
 
 const Home: NextPage = () => {
 
-  // const defaultData : { id: string; }[] = [{id : ''}]
-  // const [personsData, setPersonsData] = useState<any>(defaultData)
-
-  // useEffect(() => {
-  //   setPersonsData(firebaseCollectedData)
-  //   console.log(personsData)
-  // },[])
-
-  //console.log(personsData)
+  const q = query(colRef, orderBy('firstName', 'asc'))
   return (
     <div>
       <h1>This is the Home Page</h1>
 
-      <GetPersons/>
+      <GetPersons query={q}/>
     </div>
   )
 }
-
-// export const getServerSideProps: GetServerSideProps = async (context : any) => {
-//   const persons = firebaseCollectedData
-//   return{
-//     props:{
-//       persons
-//     }
-//   }
-// }
 
 export default Home

@@ -1,5 +1,5 @@
 import firebase, { initializeApp } from 'firebase/app'
-import {getFirestore, collection, getDocs, addDoc, doc, deleteDoc, query, orderBy, onSnapshot} from 'firebase/firestore'
+import {getFirestore, collection, getDocs, addDoc, doc, deleteDoc, query, orderBy, onSnapshot, updateDoc} from 'firebase/firestore'
 
 export interface PersonData{
     firstName: string,
@@ -26,24 +26,7 @@ export const colRef = collection(db, 'Persons') //COLLECTION REFERENCE
 
 export const q = query(colRef,orderBy('lastName','asc'))
 
-// export var firebaseCollectedData : any[] //COLLECTED DATA FROM FIREBASE 
-
-// const firebaseCollectData = () => { //FETCH DATA FROM FIREBASE DATABASE
-//     let persons: { id: string; }[] = []
-
-//     onSnapshot(q, (snapshot) => {
-//         snapshot.docs.forEach((doc) =>{
-//             persons.push({...doc.data(), id: doc.id})
-//         })
-//         //persons.map(person => console.log(person))
-//     })
-
-//     firebaseCollectedData = persons //SET FIREBASECOLLECTED DATA TO PERSONS
-// }
-
-
-
-export const firebaseAddData = (props : PersonData, action : () => void) => { //ADD DATA TO FIREBASE
+export const firebaseAddData = (props : PersonData, action? : () => void) => { //ADD DATA TO FIREBASE
     addDoc(colRef, {
         firstName : props.firstName,
         lastName : props.lastName,
@@ -52,7 +35,7 @@ export const firebaseAddData = (props : PersonData, action : () => void) => { //
         profileImage : props.profileImage
     })
     .then(() => {
-        action()
+        action !== undefined && action()
         //console.log(firebaseCollectData())
     })
 }
@@ -60,4 +43,16 @@ export const firebaseAddData = (props : PersonData, action : () => void) => { //
 export const firebaseDeleteData = (id : string, action: () => void) =>{ //DELETE DATA FROM FIREBASE
     const docRef = doc(db, 'Persons', id)
     deleteDoc(docRef).then(() => {action()})
+}
+
+export const firebaseUpdateData = (id: string, props: PersonData)  => {
+    const docRef = doc(db, 'Persons', id)
+    updateDoc(docRef,{
+        firstName : props.firstName,
+        lastName : props.lastName,
+        age : props.age,
+        aboutMe : props.aboutMe,
+        profileImage : props.profileImage
+    }).then(() => {console.log(props)})
+
 }

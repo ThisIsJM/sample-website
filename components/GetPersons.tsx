@@ -1,15 +1,21 @@
-import { onSnapshot } from 'firebase/firestore';
+import { DocumentData, onSnapshot, query, Query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { q } from '../firebaseManager';
+import { colRef, q } from '../firebaseManager';
 import PersonList from './PersonList';
 
 
-const GetPersons = () => {
+const GetPersons = (props : {query?: Query<DocumentData>}) => {
 
     const [firebaseDataCollection, setFirebaseDataCollection] = useState<any[]>([])
+    const [queryInput, setQuery] = useState<Query<DocumentData>>(query(colRef))
+
+    useEffect(() =>{
+        props.query !== undefined && setQuery(props.query)   
+    },[])
+
 
     useEffect(() => {
-    onSnapshot(q, (snapshot) => {
+    onSnapshot(queryInput, (snapshot) => {
        setFirebaseDataCollection(snapshot.docs.map(
             (doc) => ({ id: doc.id, ...doc.data() })
        ))
