@@ -1,4 +1,5 @@
 import DeleteForm from "../components/DeleteForm"
+import React from 'react'
 
 const deleteperson = () => {
 
