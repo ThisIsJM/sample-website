@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { q } from '../../../firebaseManager'
 
 
-const person = ({id}:  InferGetServerSidePropsType<typeof getServerSideProps> ) => {
+const Person = ({id}:  InferGetServerSidePropsType<typeof getServerSideProps> ) => {
 
   const [firebaseDataCollection, setFirebaseDataCollection] = useState<any[]>([])
 
@@ -40,4 +40,4 @@ export const getServerSideProps: GetServerSideProps = async(context : any) => {
     }
 }
 
-export default person;
+export default Person;
