@@ -1,10 +1,10 @@
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
+import type { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage } from 'next'
 import PersonList from '../components/PersonList' 
 import { data } from '../data'
 import HomeStyles from '../styles/Home.module.css'
 import {firebaseCollectedData} from '../firebaseManager'
 
-const Home: NextPage = ({persons} : InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home: NextPage = ({persons} :InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
   return (
     
@@ -18,9 +18,7 @@ const Home: NextPage = ({persons} : InferGetStaticPropsType<typeof getStaticProp
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  // const res = await fetch(`${server}/api/persons`)
-  // const persons = await res.json()
+export const getServerSideProps: GetServerSideProps = async (context : any) => {
   const persons = firebaseCollectedData
   return{
     props:{
