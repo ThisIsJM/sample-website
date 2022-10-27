@@ -20,28 +20,28 @@ const firebaseConfig = {
   
 initializeApp(firebaseConfig) //INIT FIREBASE APP
   
-const db = getFirestore() // INIT SERVICES
+export const db = getFirestore() // INIT SERVICES
 
-const colRef = collection(db, 'Persons') //COLLECTION REFERENCE
+export const colRef = collection(db, 'Persons') //COLLECTION REFERENCE
 
-const q = query(colRef,orderBy('lastName','asc'))
+export const q = query(colRef,orderBy('lastName','asc'))
 
-const firebaseCollectData = () => { //FETCH DATA FROM FIREBASE DATABASE
-    let persons: { id: string; }[] = []
+// export var firebaseCollectedData : any[] //COLLECTED DATA FROM FIREBASE 
 
-    onSnapshot(q, (snapshot) => {
-        snapshot.docs.forEach((doc) =>{
-            persons.push({...doc.data(), id: doc.id})
-        })
-        //persons.map(person => console.log(person))
-    })
+// const firebaseCollectData = () => { //FETCH DATA FROM FIREBASE DATABASE
+//     let persons: { id: string; }[] = []
 
-    return(
-        persons
-    )
-}
+//     onSnapshot(q, (snapshot) => {
+//         snapshot.docs.forEach((doc) =>{
+//             persons.push({...doc.data(), id: doc.id})
+//         })
+//         //persons.map(person => console.log(person))
+//     })
 
-export var firebaseCollectedData  = firebaseCollectData() //COLLECTED DATA FROM FIREBASE
+//     firebaseCollectedData = persons //SET FIREBASECOLLECTED DATA TO PERSONS
+// }
+
+
 
 export const firebaseAddData = (props : PersonData, action : () => void) => { //ADD DATA TO FIREBASE
     addDoc(colRef, {
@@ -53,7 +53,7 @@ export const firebaseAddData = (props : PersonData, action : () => void) => { //
     })
     .then(() => {
         action()
-        console.log(firebaseCollectData())
+        //console.log(firebaseCollectData())
     })
 }
 
