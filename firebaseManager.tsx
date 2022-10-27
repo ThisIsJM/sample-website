@@ -33,7 +33,7 @@ const firebaseCollectData = () => { //FETCH DATA FROM FIREBASE DATABASE
         snapshot.docs.forEach((doc) =>{
             persons.push({...doc.data(), id: doc.id})
         })
-        persons.map(person => console.log(person))
+        //persons.map(person => console.log(person))
     })
 
     return(
