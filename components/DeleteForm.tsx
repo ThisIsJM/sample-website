@@ -6,7 +6,7 @@ const DeleteForm = () => {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        firebaseDeleteData(id, () => {setId('')})
+        firebaseDeleteData(id)
     }
 
   return (

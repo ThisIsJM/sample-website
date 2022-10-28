@@ -40,9 +40,9 @@ export const firebaseAddData = (props : PersonData, action? : () => void) => { /
     })
 }
 
-export const firebaseDeleteData = (id : string, action: () => void) =>{ //DELETE DATA FROM FIREBASE
+export const firebaseDeleteData = (id : string) =>{ //DELETE DATA FROM FIREBASE
     const docRef = doc(db, 'Persons', id)
-    deleteDoc(docRef).then(() => {action()})
+    deleteDoc(docRef).then(() => {console.log("Item Deleted")})
 }
 
 export const firebaseUpdateData = (id: string, props: PersonData)  => {
