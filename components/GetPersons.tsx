@@ -15,11 +15,10 @@ const GetPersons = (props : {query?: Query<DocumentData>}) => {
 
 
     useEffect(() => {
-    onSnapshot(queryInput, (snapshot) => {
-       setFirebaseDataCollection(snapshot.docs.map(
-            (doc) => ({ id: doc.id, ...doc.data() })
-       ))
-        //persons.map(person => console.log(person))
+      onSnapshot(queryInput, (snapshot) => {
+        setFirebaseDataCollection(snapshot.docs.map(
+              (doc) => ({ id: doc.id, ...doc.data() })
+        ))
     })
     },[])
 
